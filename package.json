@@ -1,0 +1,55 @@
+{
+  "name": "request-oauth",
+  "version": "0.0.0",
+  "description": "OAuth 1.0 Client",
+  "keywords": [
+    "oauth",
+    "client"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/simov/request-oauth",
+  "author": "Simeon Velichkov <simeonvelichkov@gmail.com> (https://simov.github.io)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simov/request-oauth.git"
+  },
+  "dependencies": {
+    "qs": "^6.5.1",
+    "uuid": "^3.2.1",
+    "oauth-sign": "^0.8.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "coveralls": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.0.4",
+    "request-compose": "0.0.4",
+    "request-logs": "0.0.4"
+  },
+  "bin": {},
+  "main": "./build/index.js",
+  "files": [
+    "build/",
+    "index.js",
+    "mw.js",
+    "oauth.js",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "test": "npm run test:ci",
+    "test:ci": "v=$(node -v | cut -b 2-2) && if [ $v -ge 8 ]; then p=\"test\"; else p=\"build/test\"; fi && mocha $p --recursive",
+    "test:cov": "istanbul cover _mocha -- --recursive",
+    "build:test": "babel test --out-dir build/test",
+    "copy:test/ssl": "babel test/ssl --out-dir build/test/ssl --copy-files",
+    "build:main": "babel *.js --out-dir build",
+    "build": "rm -rf build/ && mkdir -p build && npm run build:test && npm run copy:test/ssl && npm run build:main",
+    "prepublish": "npm run build"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
