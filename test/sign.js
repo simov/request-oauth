@@ -289,16 +289,6 @@ var client = (args) => compose(
     args.oauth ? mw(args.oauth) : ({options}) => ({options})
   )(),
 
-  (() => ({options, body}) =>
-    body ? Request.length()({options, body}) : {options}
-  )(),
-
-  // Request.send(),
-
-  // Response.buffer(),
-  // Response.status(),
-  // Response.parse(),
-
 )()
 
 var parse = {
@@ -904,15 +894,6 @@ describe('sign', () => {
         'should throw'
       )
     }
-  })
-
-
-  it.skip('refresh oauth_nonce on redirect', () => {
-
-  })
-
-  it.skip('no credentials on external redirect', () => {
-
   })
 
 })
