@@ -3,23 +3,42 @@
 
 [![npm-version]][npm] [![travis-ci]][travis] [![coveralls-status]][coveralls]
 
+[OAuth] support for [request-compose]
 
-## Options
+```js
+var compose = require('request-compose')
+compose.Request.oauth = require('request-oauth')
+var request = compose.client
 
-###### Required
+;(async () => {
+  try {
+    var {body} = await request({
+      url: 'https://api.twitter.com/1.1/users/show.json',
+      qs: {
+        screen_name: '[SCREEN NAME]'
+      },
+      oauth: {
+        consumer_key: '[APP ID]',
+        consumer_secret: '[APP SECRET]',
+        token: '[ACCESS TOKEN]',
+        token_secret: '[ACCESS SECRET]',
+      }
+    })
+    console.log(body)
+  }
+  catch (err) {
+    console.error(err)
+  }
+})()
+```
 
-- **oauth** `{}` see below
-- **uri** `url.parse()`'d object
-- **method** `GET` | `POST` ..
+# Table of Contents
 
-###### Optional
-
-- **query** `a=1&b=2`
-- **form** `a=1&b=2`
-- **body** `{a:1,b:2}`
+- [OAuth Options](#)
+- [**Examples**][examples]
 
 
-## OAuth Options
+# OAuth Options
 
 ###### Required
 
@@ -46,6 +65,21 @@
 - **realm**
 - **body_hash** pass you own [Body Hash][body-hash] as string or pass `true` to get one generated for you
 
+---
+
+## Internal API
+
+###### Required
+
+- **oauth** `{}` see [OAuth Options](#oauth-options)
+- **uri** `url.parse()`'d object
+- **method** `GET` | `POST` ..
+
+###### Optional
+
+- **query** `a=1&b=2`
+- **form** `a=1&b=2`
+- **body** `{a:1,b:2}`
 
 ## Result
 
@@ -86,6 +120,10 @@ else if (transport === 'body') {
   [coveralls]: https://coveralls.io/github/simov/request-oauth
   [codecov]: https://codecov.io/github/simov/request-oauth?branch=master
 
+  [oauth]: https://oauth.net/core/1.0/
   [pem-format]: http://how2ssl.com/articles/working_with_pem_files/
   [body-hash]: https://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/oauth-bodyhash.html
   [transport-method]: http://oauth.net/core/1.0/#consumer_req_param
+
+  [request-compose]: https://www.npmjs.com/package/request-compose
+  [examples]: https://github.com/simov/request-compose#examples
