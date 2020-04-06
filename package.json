@@ -14,27 +14,20 @@
     "url": "https://github.com/simov/request-oauth.git"
   },
   "dependencies": {
-    "qs": "^6.5.1",
-    "uuid": "^3.2.1",
-    "oauth-sign": "^0.8.2"
+    "qs": "^6.9.3",
+    "uuid": "^3.4.0",
+    "oauth-sign": "^0.9.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "coveralls": "^3.0.1",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.1.1",
-    "request-compose": "0.0.14",
-    "request-logs": "0.0.5"
+    "coveralls": "^3.0.11",
+    "mocha": "^7.1.1",
+    "nyc": "^15.0.1",
+    "request-compose": "^1.2.3",
+    "request-logs": "^1.0.3"
   },
   "bin": {},
-  "main": "./build/index.js",
+  "main": "./mw.js",
   "files": [
-    "build/index.js",
-    "build/mw.js",
-    "build/oauth.js",
-    "index.js",
     "mw.js",
     "oauth.js",
     "LICENSE",
@@ -43,15 +36,10 @@
   ],
   "scripts": {
     "test": "npm run test:ci",
-    "test:ci": "v=$(node -e \"console.log(process.version.split('.')[0].slice(1))\") && if [ $v -ge 8 ]; then p=\"test\"; else p=\"build/test\"; fi && mocha $p --recursive",
-    "test:cov": "istanbul cover _mocha -- --recursive",
-    "build:test": "babel test --out-dir build/test",
-    "copy:test/ssl": "cp -r test/ssl/ build/test/",
-    "build:main": "babel *.js --out-dir build",
-    "build": "rm -rf build/ && mkdir -p build && npm run build:test && npm run copy:test/ssl && npm run build:main",
-    "prepublish": "npm run build"
+    "test:ci": "npx mocha --recursive",
+    "test:cov": "npx nyc --reporter=lcov --reporter=text-summary mocha -- --recursive"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=8.0.0"
   }
 }
