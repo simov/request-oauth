@@ -1,6 +1,6 @@
 {
   "name": "request-oauth",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "OAuth 1.0 Client",
   "keywords": [
     "oauth",
