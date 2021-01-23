@@ -2,9 +2,9 @@
 var t = require('assert')
 var http = require('http')
 
-var compose = require('request-compose')
-compose.Request.oauth = require('../')
-var request = compose.client
+var request = require('request-compose').extend({
+  Request: {oauth: require('../')}
+}).client
 
 
 describe('redirect', () => {
