@@ -1,6 +1,6 @@
 {
   "name": "request-oauth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "OAuth 1.0a support for request-compose",
   "keywords": [
     "request",
